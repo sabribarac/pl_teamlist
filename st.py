@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 import streamlit as st
-import pyperclip
 
 def main():
     st.title("Premier League Table")
@@ -15,10 +14,6 @@ def main():
     team_table = "\n".join([f"{idx}. {team_name}" for idx, team_name in enumerate(team_names, start=1)])
     
     team_list = st.text_area("Team List", team_table, height=500)
-    
-    if st.button("Copy to Clipboard"):
-        pyperclip.copy(team_list)
-        st.success("Text copied to clipboard!")
 
 if __name__ == '__main__':
     main()
