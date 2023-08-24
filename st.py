@@ -1,9 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
 import streamlit as st
+import pyperclip
 
 def main():
-    st.title("Premier League Team List")
+    st.title("Premier League Table")
 
     url = "https://www.bbc.com/sport/football/premier-league/table"
     html_content = requests.get(url).text
@@ -11,9 +12,13 @@ def main():
     team_name_elements = soup.find_all('a', class_='ssrcss-13tfrt4-TeamName e1uquauq3')
     team_names = [element.get_text() for element in team_name_elements]
 
-    team_list = "\n".join([f"{idx}. {team_name}" for idx, team_name in enumerate(team_names, start=1)])
+    team_table = "\n".join([f"{idx}. {team_name}" for idx, team_name in enumerate(team_names, start=1)])
     
-    st.text_area("Team List", team_list, height=1200)
+    team_list = st.text_area("Team List", team_table, height=500)
+    
+    if st.button("Copy to Clipboard"):
+        pyperclip.copy(team_list)
+        st.success("Text copied to clipboard!")
 
 if __name__ == '__main__':
     main()
