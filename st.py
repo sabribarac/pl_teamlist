@@ -5,7 +5,7 @@ import streamlit as st
 def main():
     st.title("Premier League Table")
 
-    url = "https://www.bbc.com/sport/football/premier-league/table"
+    url = "https://www.premierleague.com/tables"
     response = requests.get(url)
 
     if response.status_code == 200:
